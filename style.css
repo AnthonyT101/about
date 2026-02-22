@@ -109,3 +109,48 @@ footer {
     padding: 30px 20px;
     margin-top: 60px;
 }
+
+/* ===== HERO IMPROVEMENTS ===== */
+.hero {
+    text-align: center;
+}
+
+.subtitle {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.button.secondary {
+    background: white;
+    color: #2563eb;
+    margin-left: 15px;
+    border: 2px solid #2563eb;
+}
+
+.button.secondary:hover {
+    background: #2563eb;
+    color: white;
+}
+
+/* ===== CENTERED SECTIONS ===== */
+.center-section {
+    text-align: center;
+}
+
+/* ===== GRID LAYOUT ===== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Make cards inside grids align nicely */
+.card-grid .card {
+    text-align: left;
+}
