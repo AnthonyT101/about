@@ -34,7 +34,7 @@ header{
 }
 /* Scoped hero styles for the homepage: use a .hero container inside header */
 header .hero{
-  background: linear-gradient(135deg,var(--bg) 0%, #0b1220 100%);
+  background: linear-gradient(135deg,var(--bg) 0%, #3e4044 100%);
   color: #ffffff;
   padding:64px 24px;
   border-radius:12px;
@@ -79,7 +79,7 @@ h3{font-size:1.05rem;margin:0 0 10px}
 .hero-buttons{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 /* Footer */
-footer{background:linear-gradient(180deg,#071024,#0b1220);color:#cbd5e1;padding:36px 24px;border-radius:12px;margin-top:48px;text-align:center}
+footer{background:linear-gradient(180deg,#3e4044,#3e4044);color:#cbd5e1;padding:36px 24px;border-radius:12px;margin-top:48px;text-align:center}
 
 /* Accessibility focus states */
 :where(a,button,input,textarea){outline:none}
