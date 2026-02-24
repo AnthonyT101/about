@@ -1,163 +1,97 @@
-/* ===== GLOBAL RESET ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+    --bg: #0f172a;
+    --surface: #ffffff;
+    --muted: #94a3b8;
+    --text: #0f172a;
+    --accent: #2563eb;
+    --accent-600: #1d4ed8;
+    --radius: 12px;
+    --container: 1100px;
+    --glass: rgba(255,255,255,0.06);
+    --transition: 220ms cubic-bezier(.2,.9,.25,1);
 }
 
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #f8f9fb;
-    color: #1a1a1a;
-    line-height: 1.6;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,#f5f7fb 0%, #eef2f7 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+  font-size:16px;
 }
 
-/* ===== LAYOUT CONTAINER ===== */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 60px 20px;
+.container{max-width:var(--container);margin:0 auto;padding:48px 24px}
+
+/* Header / Hero */
+header{
+  background: linear-gradient(135deg,var(--bg) 0%, #0b1220 100%);
+  color: #ffffff;
+  padding:64px 24px;
+}
+header .header-content{max-width:980px;margin:0 auto;text-align:center}
+header h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:12px;letter-spacing:-0.02em}
+header p{color:rgba(255,255,255,0.9);font-size:1.05rem}
+
+/* Navbar */
+nav{position:sticky;top:12px;z-index:60;padding:8px 0}
+nav .nav-inner{background:rgba(255,255,255,0.95);backdrop-filter: blur(6px);border-radius:14px;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(12,18,28,0.08)}
+nav .brand{font-weight:700;color:var(--bg);text-decoration:none}
+nav .links{display:flex;gap:18px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:8px;transition:var(--transition)}
+nav a:hover,nav a:focus{background:var(--glass);color:var(--accent)}
+
+/* Responsive nav fallback for simple sites */
+@media (max-width:720px){
+  nav .links{display:none}
 }
 
-/* ===== HERO SECTION ===== */
-header {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    min-height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+/* Headings */
+h1,h2,h3{color:var(--text);line-height:1.15}
+h2{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 20px}
+h3{font-size:1.05rem;margin:0 0 10px}
+
+/* Cards */
+.card{background:var(--surface);padding:24px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(12,20,30,0.06);transition:transform var(--transition), box-shadow var(--transition)}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(12,20,30,0.09)}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:28px}
+
+/* Buttons */
+.button{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;box-shadow:0 8px 24px rgba(37,99,235,0.14);transition:all var(--transition)}
+.button:hover{background:var(--accent-600);transform:translateY(-2px)}
+.button.secondary{background:transparent;color:var(--accent);border:2px solid rgba(37,99,235,0.12)}
+
+/* Utility */
+.center-section{text-align:center}
+.subtitle{margin-top:12px;font-size:1.05rem;color:var(--muted)}
+.hero-buttons{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* Footer */
+footer{background:linear-gradient(180deg,#071024,#0b1220);color:#cbd5e1;padding:36px 24px;border-radius:12px;margin-top:48px;text-align:center}
+
+/* Accessibility focus states */
+:where(a,button,input,textarea){outline:none}
+:where(a,button,input,textarea):focus-visible{outline:3px solid rgba(37,99,235,0.18);outline-offset:4px;border-radius:8px}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
 }
 
-header .header-content {
-    max-width: 800px;
-    padding: 10px 20px;
+/* Dark mode support */
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0b1220;--surface:#071226;--text:#e6eef8;--muted:#9fb0c9;--glass:rgba(255,255,255,0.03)}
+  body{background:linear-gradient(180deg,#061025,#07142a)}
+  nav .nav-inner{background:rgba(10,14,22,0.65)}
+  footer{background:linear-gradient(180deg,#031021,#041226)}
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-header p {
-    opacity: 0.9;
-}
-
-/* ===== NAVBAR ===== */
-nav {
-    background: white;
-    padding: 18px 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    z-index: 100;
-}
-
-nav a {
-    margin: 0 20px;
-    text-decoration: none;
-    color: #0f172a;
-    font-weight: 600;
-    transition: 0.2s ease;
-}
-
-nav a:hover {
-    color: #2563eb;
-}
-
-/* ===== SECTION TITLES ===== */
-h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-}
-
-h3 {
-    margin-bottom: 10px;
-}
-
-/* ===== CARD STYLE ===== */
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
-    transition: 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* ===== BUTTON ===== */
-.button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #2563eb;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: 0.2s ease;
-}
-
-.button:hover {
-    background: #1d4ed8;
-}
-
-/* ===== FOOTER ===== */
-footer {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 30px 20px;
-    margin-top: 60px;
-}
-
-/* ===== HERO IMPROVEMENTS ===== */
-.hero {
-    text-align: center;
-}
-
-.subtitle {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-.hero-buttons {
-    margin-top: 30px;
-}
-
-.button.secondary {
-    background: white;
-    color: #2563eb;
-    margin-left: 15px;
-    border: 2px solid #2563eb;
-}
-
-.button.secondary:hover {
-    background: #2563eb;
-    color: white;
-}
-
-/* ===== CENTERED SECTIONS ===== */
-.center-section {
-    text-align: center;
-}
-
-/* ===== GRID LAYOUT ===== */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-/* Make cards inside grids align nicely */
-.card-grid .card {
-    text-align: left;
+/* Small adjustments for very small screens */
+@media (max-width:420px){
+  .container{padding:28px 16px}
+  header{padding:40px 16px}
+  .card{padding:18px}
 }
