@@ -36,28 +36,35 @@
     <div class="card">
         <h3>Working Around Agent Linkage Issues</h3>
         <p>
-            Recently, I've come across an issue of Tenable Nessus Agents unlinking randomly from the Tenable Manager node.
-            I was doing this manually by using the nessuscli to get the status of the agent to see if it was linked to the manager or not.
-            So I got to thinking about how I can make this process automated using the tools I had readily available.
+            Recently I’ve been running into a recurring issue where Tenable Nessus Agents will randomly unlink from the Tenable Manager node.
+            When that happens, devices quietly fall out of coverage until someone notices — which is exactly the kind of problem you want to
+            detect quickly and fix consistently.
         </p>
         <p>
-            I use PDQ Connect as my cloud deployment tool. It is a great tool and makes endpoint management a piece of cake.
-            Their roadmap shows a Powershell Scanner being implemented soon, but not soon enough for me.
-            If I wanted to create a group that used the results from the nessuscli command to see if the agents are linked,
-            I'd have to create a temporary workaround until its implementation.
+            Originally, I was checking linkage manually by running nessuscli on endpoints and reviewing the agent status. That works, but it
+            doesn’t scale well when you’re responsible for a large fleet. So I started looking for a way to automate the detection using tools
+            I already had in place.
         </p>
         <p>
-            So I created a script that ran the nessuscli command and extracted the value that determined if the agent was linked
-            or unlinked. From there, if the agent was linked, it would create a file called "Linked.txt" in the Temp folder. Likewise,
-            if the agent was unlinked, it would create a file called "Unlinked.txt". From there, I created a file scanner in PDQ
-            Connect that looked in the Temp folders of all devices for the names of those txt files. Then I created corresponding
-            groups so I can see devices that are linked and unlinked. I have the script scheduled to run once a week so I can see
-            what devices have disconnected, so I can go back and link it.
+            In my environment, PDQ Connect is our primary cloud deployment tool. It makes endpoint management straightforward, but at the time
+            of writing, it doesn’t yet have a native PowerShell scanner (it’s on the roadmap — just not available soon enough for what I needed).
+            Because of that limitation, I couldn’t build a dynamic group directly off the output of nessuscli, so I created a lightweight workaround.
         </p>
         <p>
-            Eventually, when the powershell scanner is added, I can modify the group to where if a device unlinks, it will be added
-            to the unlinked group automatically, then the Agent Linkage repair package we have can go in and relink the agent.
-            Sometimes you have to think outside the box in order to get the results you are looking for.
+            The approach is simple: a script runs the nessuscli command, extracts the value that indicates whether the agent is linked or unlinked,
+            and then writes a marker file in the Temp directory. If the agent is linked, the script creates Linked.txt. If the agent is unlinked,
+            it creates Unlinked.txt. From there, PDQ Connect’s file scanner does the rest — it checks endpoints for the presence of those marker files,
+            and I use that signal to populate two device groups: Linked and Unlinked.
+        </p>
+        <p>
+            I schedule the script to run weekly so I can quickly identify which devices have fallen out of linkage and relink them before coverage gaps
+            linger. The best part is that this pattern is easy to evolve: once PDQ Connect adds a PowerShell scanner, I can remove the file-marker middle
+            step and have the group evaluate the linkage state directly. At that point, it becomes a closed loop — detect unlinked agents automatically,
+            drop them into an Unlinked group, and trigger the Agent Linkage repair package to relink and restore coverage.
+        </p>
+        <p>
+            Sometimes you have to think a little outside the box to get the outcome you want — especially when you’re working around feature gaps — but
+            small automation wins like this can make day-to-day operations much more reliable.
         </p>
     </div>
 
