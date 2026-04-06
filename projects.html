@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Anthony Bracero</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && dark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
-
 <body>
 
 <nav>
@@ -14,19 +22,32 @@
         <a href="index.html" class="brand">Anthony Bracero</a>
         <div class="links">
             <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
+            <a href="projects.html" class="active">Projects</a>
             <a href="certifications.html">Certifications</a>
             <a href="technical-blog.html">Technical Blog</a>
             <a href="personal-blog.html">Personal Blog</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 </nav>
 
 <header>
-    <div class="container">
+    <div class="hero-inner">
+        <p class="section-label">Work</p>
         <h1>Projects</h1>
         <p class="subtitle">
-            Selected initiatives focused on infrastructure, security, and automation.
+            Selected initiatives in infrastructure, security, and automation
+            from my role at Transcard.
         </p>
     </div>
 </header>
@@ -35,7 +56,7 @@
 
     <div class="card-grid">
 
-        <div class="card">
+        <div class="card fade-in">
             <h3>Vulnerability Reduction Initiative</h3>
             <p>
                 Led remediation efforts to reduce critical and high-severity
@@ -43,24 +64,42 @@
                 workflows, coordinated with stakeholders, and improved
                 compliance metrics.
             </p>
+            <div class="tags">
+                <span class="tag">Tenable Nessus</span>
+                <span class="tag">Patch Management</span>
+                <span class="tag">Compliance</span>
+                <span class="tag">Security</span>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Endpoint & Patch Management</h3>
+        <div class="card fade-in">
+            <h3>Endpoint &amp; Patch Management</h3>
             <p>
                 Managed endpoint lifecycle processes including OS updates,
                 security patch deployment, and performance optimization.
-                Standardized update procedures to improve system stability.
+                Standardized update procedures to improve system stability
+                across the fleet.
             </p>
+            <div class="tags">
+                <span class="tag">PDQ Connect</span>
+                <span class="tag">Windows</span>
+                <span class="tag">Lifecycle Mgmt</span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card fade-in">
             <h3>Security Reporting Automation</h3>
             <p>
                 Developed automation scripts to generate recurring security
                 reports, reducing manual effort and improving reporting
                 accuracy for leadership and compliance reviews.
             </p>
+            <div class="tags">
+                <span class="tag">PowerShell</span>
+                <span class="tag">Python</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Reporting</span>
+            </div>
         </div>
 
     </div>
@@ -68,8 +107,15 @@
 </section>
 
 <footer>
-    <p>© 2026 Anthony Bracero</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="technical-blog.html">Technical Blog</a>
+        <a href="personal-blog.html">Personal Blog</a>
+    </nav>
+    <p>&#169; 2026 Anthony Bracero</p>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>

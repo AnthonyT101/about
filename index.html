@@ -5,38 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anthony Bracero | Systems Administrator</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      // Prevent flash of wrong theme
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && dark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
-
 <body>
 
 <nav>
     <div class="nav-inner">
         <a href="index.html" class="brand">Anthony Bracero</a>
         <div class="links">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="projects.html">Projects</a>
             <a href="certifications.html">Certifications</a>
             <a href="technical-blog.html">Technical Blog</a>
             <a href="personal-blog.html">Personal Blog</a>
         </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </div>
 </nav>
 
 <header>
-    <div class="container">
-        <h1>Systems Administration & Infrastructure</h1>
+    <div class="hero-inner">
+        <p class="section-label">Systems Administrator &amp; IT Professional</p>
+        <h1>Infrastructure,<br>Security &amp; Automation</h1>
         <p class="subtitle">
-            IT professional focused on infrastructure, security, and automation.
+            Building reliable systems and automating operations at Transcard.
+            B.S. Computer Science — Cybersecurity, University of Tennessee at Chattanooga.
         </p>
+        <div class="btn-group">
+            <a href="projects.html" class="button">View Projects</a>
+            <a href="personal-blog.html" class="button secondary">Read My Story</a>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">Full-Time</span>
+                <span class="stat-label">Systems Admin</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">B.S. CS</span>
+                <span class="stat-label">Cybersecurity</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">3.6</span>
+                <span class="stat-label">Cumulative GPA</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">Cum Laude</span>
+                <span class="stat-label">Honors Graduate</span>
+            </div>
+        </div>
     </div>
 </header>
 
 <section class="container">
+    <p class="section-label">What I Do</p>
     <h2>Core Competencies</h2>
 
     <div class="card-grid">
 
-        <div class="card">
+        <div class="card fade-in">
             <h3>Infrastructure Management</h3>
             <p>
                 Server administration, virtualization, cloud environments,
@@ -44,16 +89,16 @@
             </p>
         </div>
 
-        <div class="card">
-            <h3>Security & Vulnerability Remediation</h3>
+        <div class="card fade-in">
+            <h3>Security &amp; Vulnerability Remediation</h3>
             <p>
                 Risk mitigation, endpoint security, vulnerability scanning,
                 compliance alignment, and incident response support.
             </p>
         </div>
 
-        <div class="card">
-            <h3>Automation & Reporting</h3>
+        <div class="card fade-in">
+            <h3>Automation &amp; Reporting</h3>
             <p>
                 Scripting and automation to streamline operations,
                 generate reporting, and improve efficiency.
@@ -64,8 +109,15 @@
 </section>
 
 <footer>
-    <p>© 2026 Anthony Bracero</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="technical-blog.html">Technical Blog</a>
+        <a href="personal-blog.html">Personal Blog</a>
+    </nav>
+    <p>&#169; 2026 Anthony Bracero</p>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>

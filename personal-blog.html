@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Blog | Anthony Bracero</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && dark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
-
 <body>
 
 <nav>
@@ -17,235 +25,290 @@
             <a href="projects.html">Projects</a>
             <a href="certifications.html">Certifications</a>
             <a href="technical-blog.html">Technical Blog</a>
-            <a href="personal-blog.html">Personal Blog</a>
+            <a href="personal-blog.html" class="active">Personal Blog</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 </nav>
 
 <header>
-    <div class="container">
-        <h1>Personal Blog</h1>
+    <div class="hero-inner">
+        <p class="section-label">Personal Blog</p>
+        <h1>Career Milestones<br>&amp; Reflections</h1>
         <p class="subtitle">
-            Career milestones, reflections, and lessons learned along the journey.
+            The journey from help desk to systems administrator —
+            lessons learned, opportunities earned, and what comes next.
         </p>
     </div>
 </header>
 
 <section class="container">
-    <div class="card">
-        <h3>Entry #8 — March 2026</h3>
-        <p>
-            I had to opportunity to table at UTC's CECS Career Fair on behalf of Transcard. It was amazing to
-            have the opportunity to speak to upcoming young professionals at the career fair. I know exactly
-            how it is to be in their shoes. I've been to the career fair three times, the first two, as a student
-            and a CECS ambassador. I've helped set up the career fairs as well as participated to get an internship.
-        </p>
-        <p>
-            My first CECS career fair, I learned the ropes on how to talk to recruiters and what they were looking for.
-            My second CECS career fair, I gained the opportunity to interview with Transcard and eventually get the IT
-            Infrastructure internship. My third CECS career fair, I had the opportunity to table and speak to students
-            about Transcard, and what opportunities were available the Spring and Summer. Truly thankful for the
-            opportunity to play all sides: Student, Ambassador, and Representative.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #7 — January 2026</h3>
-        <p>
-            I’m excited to share that I’ve officially accepted a full-time System Administrator
-            position at Transcard, starting January 5th!
-        </p>
-        <p>
-            What started as an internship has grown into an opportunity to continue learning, building,
-            and supporting critical systems alongside an incredible infrastructure team. I’m grateful
-            for the trust, mentorship, and support that made this next step possible. Thank you to everyone
-            at Transcard and UTC who played a role in this journey. I’m proud of how far I’ve come and
-            excited for what’s ahead.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #6 — December 2025</h3>
-        <p>
-            I’m excited to share that I have officially graduated with my Bachelor of Science
-            in Computer Science: Cybersecurity from the University of Tennessee at Chattanooga!
-            This was truly my busiest and most demanding semester yet — balancing long days,
-            tight deadlines, leadership responsibilities, and professional work. Despite the
-            workload, I finished with a 4.0 Semester GPA, ending with a 3.6 cumulative GPA.
-        </p>
-        <p>
-            All of this happened while I was:
-            - Maintaining my IT Infrastructure Internship at Transcard,
-            - Serving as both a Veteran’s Ambassador and CECS Ambassador,
-            - Leading the induction process for my fraternity, and
-            - Staying active across multiple campus organizations and leadership roles.
-        </p>
-        <p>
-            Throughout my college journey, I’ve been fortunate to be heavily involved on
-            campus and recognized for leadership, service, and academic excellence:
+    <div class="timeline">
 
-            Campus Involvement & Leadership:
-            - Veteran's Ambassador
-            - Chancellor's Ambassador
-            - CECS Ambassador
-            - H.O.L.A
-            - MocSec Cybersecurity
-            - Founding Brother, President, and Induction Officer of my fraternity
-            - Fraternity received a Proclamation from the City of Chattanooga during Presidency
-        </p>
-        <p>
-            Honors & Achievements:
-            - Cum Laude
-            - Dean's List (8x)
-            - Scholars-in-Residence (3x)
-            - 2024 Hispanic Scholarship Fund Scholar
-            - Graduated completely debt-free through scholarships, service, and hard work
-        </p>
-        <p>
-            Scholarships Awarded:
-            - UTC Provost Scholarship
-            - UCF ISSA Chatt Cybersecurity Annual Scholarship
-            - Chattanooga Engineers Club Annual Scholarship
-            - UCF Frost Family Scholarship
-            - Maj. Gen. James Ursano Scholarship
+        <!-- Entry #8 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">March 2026</div>
+            <div class="card">
+                <h3>Entry #8 &mdash; Representing Transcard at the UTC Career Fair</h3>
+                <p>
+                    I had the opportunity to table at UTC's CECS Career Fair on behalf of Transcard. It was
+                    amazing to speak to upcoming young professionals — I know exactly what it's like to be
+                    in their shoes. I've been to the career fair three times: the first two as a student and
+                    a CECS Ambassador, helping set up the fair and participating to land an internship.
+                </p>
+                <p>
+                    My first CECS career fair, I learned the ropes on how to talk to recruiters and what
+                    they were looking for. My second, I gained the opportunity to interview with Transcard
+                    and eventually earn the IT Infrastructure internship. My third — I had the opportunity
+                    to table and speak to students about Transcard and available opportunities. Truly
+                    thankful for the chance to play all three sides: Student, Ambassador, and Representative.
+                </p>
+            </div>
+        </div>
 
-            This semester taught me a lot about discipline, time management, and resilience.
-            I’m incredibly grateful for the mentors, colleagues, classmates, and friends who
-            supported me throughout my journey at UTC.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #5 — November 2025</h3>
-        <p>
-            34 Days Until Graduation.
-        </p>
-        <p>
-           As I enter week 13 of my final semester, I’ve been taking a step back to truly take it all in. Everything
-            I’ve accomplished so far has shaped me into who I am today, and I’m grateful for every challenge, lesson,
-            and opportunity along the way. Right now, I’m slowing down a bit, not rushing to the finish line, but
-            instead choosing to enjoy these last moments: my campus, my friends, my work, my projects, and my life.
-            I’m not uncertain about where my path is headed after college, I’m excited for both the known and the unknown.
-            Looking back at where I was this time last year, I see growth, resilience, and purpose.
-        </p>
-        <p>
-            As I prepare for this next chapter, I look forward to continuing to grow personally and professionally, and
-            to give back as a mentor to my alma mater and my fraternity, just as others have done for me. Here’s to new
-            beginnings, continued blessings, and all that’s yet to come.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #4 — September 2025</h3>
-        <p>
-            As my summer comes to a close, I’ve been reflecting on the incredible hands-on experience I’ve gained
-            as an IT Infrastructure Intern at Transcard. Over the past few months, I’ve had the opportunity to work
-            closely with a talented team who have been instrumental in my growth. My role enabled me to delve deeply
-            into enterprise IT systems and the operational aspects of IT, including supporting users, IT asset
-            management, and enhancing system reliability. This internship has strengthened my technical foundation
-            and given me a real-world understanding of how IT infrastructure supports business operations.
-        </p>
-        <p>
-            Some of the highlights include: Remediating vulnerabilities across frequently used applications, helping
-            reduce risk and improve performance. Automating patching routines to streamline security updates and
-            reduce manual overhead. Providing IT support for hardware and software issues, assisting with onboarding,
-            and maintaining IT asset management.
-        </p>
-        <p>
-            I am incredibly grateful for the numerous enjoyable experiences that made this summer truly unforgettable.
-            From the exciting Intern outings, such as the Nashville SC game at GEODIS Park, to our memorable Internship
-            Farewell Dinner at 2nd American, every moment was filled with joy. The positive, welcoming environment in the
-            office made every day enjoyable, not to mention how great the space looks and feels to work in! I'm excited to
-            share that I will be returning to my role as an IT Infrastructure Intern for the Fall 2025 semester! I'm looking
-            forward to continuing to grow, contribute, and take on new challenges with the IT Infrastructure team.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #3 — September 2025</h3>
-        <p>
-            I've been asked Why I Founded My Fraternity Chapter and How Joining Lambda Theta Phi Changed My Life.
-            Before I was a brother, I was coasting through college with no worries and no responsibilites.
-        </p>
-        <p>
-            That changed the moment I was presented with the opportunity to potentially become a Founding Brother 
-            of the Epsilon Beta chapter at The University of Tennessee at Chattanooga. I didn’t just want to join
-            a brotherhood and do nothing with it, I wanted to commit myself to transform and grow as a man.
-        </p>
-        <p>
-            I started showing up and being intentional. I put time into meeting many different brothers from many
-            different backgrounds, learning from them, and building connections. I got my first job on campus and
-            gained responsibilities. After crossing into the brotherhood, I wanted to continue challenging myself
-            and ran for leadership. I was elected President of our newly founded chapter. I improved in my role,
-            developed strong professional relationships, met new friends, and stepped up into more student
-            ambassador roles. My resume started to grow and I could feel myself personally grow. I gained confidence.
-            I started applying for scholarships I’d usually pass up, and became an HSF Scholar and received multiple awards.
-        </p>
-        <p>
-            My chapter dedicated ourselves towards serving our community both on campus and off campus. With our
-            combined teamwork and effort, we were honored with a Proclamation from the City of Chattanooga,
-            recognizing our dedication towards service and uplifting our community. I took my professional
-            development more seriously and became a IT Help Desk Technician at my campus IT department and became
-            an ambassador for the UTC College of Engineering and Computer Science, where I gained valuable
-            experience in technical support and customer service.
-        </p>
-        <p>
-            I leaned into campus resources, joined my college’s Career Center email list, signed up for a LinkedIn
-            review, and got paired with Matt Solima from Transcard. That connection opened the door to a job shadowing
-            opportunity with the IT Security team, and later, an internship at Transcard with the IT Infrastructure team,
-            all because I stepped out of my comfort zone at the career fair and reintroduced myself to the Transcard team.
-        </p>
-        <p>
-            Now I’m here. None of this would’ve happened if I hadn’t taken that first step. Founding the Epsilon Beta chapter
-            of Lambda Theta Phi Latin Fraternity, Inc. was more than just bringing a fraternity to campus, it was about taking
-            ownership of my life, choosing growth over comfort, and building something from the ground up, for myself, my
-            brothers, and future Latino students searching for purpose and a place to belong. If you’re feeling stuck, this is
-            your sign: Take one step. Get involved. Be intentional. You never know how far it can take you!
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #2 — April 2025</h3>
-        <p>
-            I am pleased to share that I joined Transcard as an IT Infrastructure Intern for the summer.
-        </p>
-        <p>
-            I’m excited for the opportunity to work alongside a talented team supporting and strengthening
-            the systems that power innovative financial solutions. I look forward to expanding my technical
-            skills, gaining hands-on experience in the fintech space, and learning how IT infrastructure
-            enables secure and scalable growth.
-        </p>
-        <p>
-            I’m especially thankful to Matt Solima for his guidance and support throughout this process.
-            I truly appreciate the time and effort he invested in helping me along the way.
-        </p>
-    </div>
-    <br></br>
-    <div class="card">
-        <h3>Entry #1 — December 2024</h3>
-        <p>
-            I accepted a position within the University of Tennessee at Chattanooga’s IT Department
-            as an IT Help Desk Technician — my first professional role in IT.
-        </p>
-        <p>
-            Entering my senior year, this opportunity was pivotal in breaking into the IT field
-            and building foundational experience.
-        </p>
+        <!-- Entry #7 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">January 2026</div>
+            <div class="card">
+                <h3>Entry #7 &mdash; Accepting a Full-Time Role at Transcard</h3>
+                <p>
+                    I'm excited to share that I've officially accepted a full-time System Administrator
+                    position at Transcard, starting January 5th.
+                </p>
+                <p>
+                    What started as an internship has grown into an opportunity to continue learning,
+                    building, and supporting critical systems alongside an incredible infrastructure team.
+                    I'm grateful for the trust, mentorship, and support that made this next step possible.
+                    Thank you to everyone at Transcard and UTC who played a role in this journey.
+                    I'm proud of how far I've come and excited for what's ahead.
+                </p>
+            </div>
+        </div>
 
-        <p>
-            I was able to supported approximately 11,000 students, 728 faculty/staff, and 35,000 alumni.
-            I troubleshot hardware, software, and networking issues across Windows and macOS systems.
-            I provided phone and remote support in a fast-paced academic environment.
-            I assisted with password resets, email configuration, and access to university systems.
-            I communicated technical solutions clearly to users of all experience levels.
-        </p>
-    </div>
+        <!-- Entry #6 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">December 2025</div>
+            <div class="card">
+                <h3>Entry #6 &mdash; Graduating with Honors from UTC</h3>
+                <p>
+                    I'm excited to share that I have officially graduated with my Bachelor of Science in
+                    Computer Science: Cybersecurity from the University of Tennessee at Chattanooga. This
+                    was truly my busiest and most demanding semester — balancing long days, tight deadlines,
+                    leadership responsibilities, and professional work. Despite it all, I finished with a
+                    4.0 Semester GPA and a 3.6 cumulative GPA.
+                </p>
+                <p>All of this happened while I was:</p>
+                <ul>
+                    <li>Maintaining my IT Infrastructure Internship at Transcard</li>
+                    <li>Serving as both a Veteran's Ambassador and CECS Ambassador</li>
+                    <li>Leading the induction process for my fraternity</li>
+                    <li>Staying active across multiple campus organizations and leadership roles</li>
+                </ul>
 
+                <h4>Campus Involvement &amp; Leadership</h4>
+                <ul>
+                    <li>Veteran's Ambassador</li>
+                    <li>Chancellor's Ambassador</li>
+                    <li>CECS Ambassador</li>
+                    <li>H.O.L.A</li>
+                    <li>MocSec Cybersecurity</li>
+                    <li>Founding Brother, President, and Induction Officer — Lambda Theta Phi</li>
+                    <li>Chapter received a Proclamation from the City of Chattanooga during my Presidency</li>
+                </ul>
+
+                <h4>Honors &amp; Achievements</h4>
+                <ul>
+                    <li>Cum Laude</li>
+                    <li>Dean's List (8x)</li>
+                    <li>Scholars-in-Residence (3x)</li>
+                    <li>2024 Hispanic Scholarship Fund Scholar</li>
+                    <li>Graduated completely debt-free through scholarships, service, and hard work</li>
+                </ul>
+
+                <h4>Scholarships Awarded</h4>
+                <ul>
+                    <li>UTC Provost Scholarship</li>
+                    <li>UCF ISSA Chatt Cybersecurity Annual Scholarship</li>
+                    <li>Chattanooga Engineers Club Annual Scholarship</li>
+                    <li>UCF Frost Family Scholarship</li>
+                    <li>Maj. Gen. James Ursano Scholarship</li>
+                </ul>
+
+                <p>
+                    This semester taught me a great deal about discipline, time management, and resilience.
+                    I'm incredibly grateful for the mentors, colleagues, classmates, and friends who
+                    supported me throughout my journey at UTC.
+                </p>
+            </div>
+        </div>
+
+        <!-- Entry #5 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">November 2025</div>
+            <div class="card">
+                <h3>Entry #5 &mdash; 34 Days Until Graduation</h3>
+                <p>
+                    As I enter week 13 of my final semester, I've been taking a step back to truly take
+                    it all in. Everything I've accomplished has shaped me into who I am today, and I'm
+                    grateful for every challenge, lesson, and opportunity along the way. Right now, I'm
+                    slowing down — not rushing to the finish line, but choosing to enjoy these last moments:
+                    my campus, my friends, my work, my projects, and my life.
+                </p>
+                <p>
+                    I'm not uncertain about where my path is headed after college — I'm excited for both
+                    the known and the unknown. Looking back at where I was this time last year, I see growth,
+                    resilience, and purpose. As I prepare for this next chapter, I look forward to continuing
+                    to grow and to give back as a mentor to my alma mater and my fraternity, just as others
+                    have done for me. Here's to new beginnings, continued blessings, and all that's yet to come.
+                </p>
+            </div>
+        </div>
+
+        <!-- Entry #4 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">September 2025</div>
+            <div class="card">
+                <h3>Entry #4 &mdash; Summer Internship Wrap-Up &amp; Return Offer</h3>
+                <p>
+                    As my summer comes to a close, I've been reflecting on the incredible hands-on experience
+                    I've gained as an IT Infrastructure Intern at Transcard. Over the past few months, I had
+                    the opportunity to work closely with a talented team who were instrumental in my growth.
+                    My role enabled me to delve deeply into enterprise IT systems — supporting users, IT asset
+                    management, and enhancing system reliability. This internship strengthened my technical
+                    foundation and gave me a real-world understanding of how IT infrastructure supports
+                    business operations.
+                </p>
+                <p>Some of the highlights include:</p>
+                <ul>
+                    <li>Remediating vulnerabilities across frequently used applications, reducing risk and improving performance</li>
+                    <li>Automating patching routines to streamline security updates and reduce manual overhead</li>
+                    <li>Providing IT support for hardware and software issues, assisting with onboarding, and maintaining IT asset management</li>
+                </ul>
+                <p>
+                    I'm incredibly grateful for the experiences that made this summer unforgettable — from the
+                    intern outings to the Nashville SC game at GEODIS Park, to the Internship Farewell Dinner
+                    at 2nd &amp; American. I'm excited to share that I will be returning as an IT Infrastructure
+                    Intern for the Fall 2025 semester, continuing to grow and take on new challenges with the team.
+                </p>
+            </div>
+        </div>
+
+        <!-- Entry #3 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">September 2025</div>
+            <div class="card">
+                <h3>Entry #3 &mdash; Why I Founded My Fraternity Chapter</h3>
+                <p>
+                    Before I was a brother, I was coasting through college with no particular direction.
+                    That changed the moment I was presented with the opportunity to become a Founding Brother
+                    of the Epsilon Beta chapter of Lambda Theta Phi at the University of Tennessee at
+                    Chattanooga. I didn't just want to join a brotherhood — I wanted to commit myself to
+                    transform and grow as a man.
+                </p>
+                <p>
+                    I started showing up and being intentional. I put time into meeting brothers from different
+                    backgrounds, learning from them, and building connections. I got my first campus job and
+                    gained real responsibilities. After crossing into the brotherhood, I ran for leadership and
+                    was elected President of our newly founded chapter. My resume grew — and more importantly,
+                    so did I. I gained confidence, started applying for scholarships I'd normally pass on, and
+                    became an HSF Scholar.
+                </p>
+                <p>
+                    My chapter dedicated itself to serving the community both on and off campus. With our
+                    combined effort, we were honored with a Proclamation from the City of Chattanooga
+                    recognizing our dedication to service. I took my professional development more seriously,
+                    became an IT Help Desk Technician at UTC, and joined CECS as an ambassador.
+                </p>
+                <p>
+                    I leaned into campus resources, joined the Career Center email list, and got paired with
+                    Matt Solima from Transcard. That connection opened the door to a job shadowing opportunity
+                    with the IT Security team — and later, an internship with IT Infrastructure — all because
+                    I stepped out of my comfort zone at the career fair.
+                </p>
+                <p>
+                    None of this would've happened if I hadn't taken that first step. Founding the Epsilon Beta
+                    chapter was more than bringing a fraternity to campus — it was about taking ownership of my
+                    life, choosing growth over comfort, and building something from the ground up for myself,
+                    my brothers, and future Latino students searching for purpose and a place to belong.
+                    If you're feeling stuck: take one step. Get involved. Be intentional.
+                    You never know how far it can take you.
+                </p>
+            </div>
+        </div>
+
+        <!-- Entry #2 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">April 2025</div>
+            <div class="card">
+                <h3>Entry #2 &mdash; Joining Transcard as an IT Infrastructure Intern</h3>
+                <p>
+                    I'm pleased to share that I joined Transcard as an IT Infrastructure Intern for the summer.
+                </p>
+                <p>
+                    I'm excited for the opportunity to work alongside a talented team supporting and
+                    strengthening the systems that power innovative financial solutions. I look forward
+                    to expanding my technical skills, gaining hands-on experience in the fintech space,
+                    and learning how IT infrastructure enables secure and scalable growth.
+                </p>
+                <p>
+                    I'm especially thankful to Matt Solima for his guidance and support throughout this
+                    process. I truly appreciate the time and effort he invested in helping me along the way.
+                </p>
+            </div>
+        </div>
+
+        <!-- Entry #1 -->
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-meta">December 2024</div>
+            <div class="card">
+                <h3>Entry #1 &mdash; First IT Role: UTC Help Desk Technician</h3>
+                <p>
+                    I accepted a position within the University of Tennessee at Chattanooga's IT Department
+                    as an IT Help Desk Technician — my first professional role in IT. Entering my senior
+                    year, this opportunity was pivotal in breaking into the field and building foundational
+                    experience.
+                </p>
+                <ul>
+                    <li>Supported approximately 11,000 students, 728 faculty/staff, and 35,000 alumni</li>
+                    <li>Troubleshot hardware, software, and networking issues across Windows and macOS systems</li>
+                    <li>Provided phone and remote support in a fast-paced academic environment</li>
+                    <li>Assisted with password resets, email configuration, and access to university systems</li>
+                    <li>Communicated technical solutions clearly to users of all experience levels</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
 </section>
 
 <footer>
-    <p>© 2026 Anthony Bracero</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="technical-blog.html">Technical Blog</a>
+        <a href="personal-blog.html">Personal Blog</a>
+    </nav>
+    <p>&#169; 2026 Anthony Bracero</p>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>

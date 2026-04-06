@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certifications | Anthony Bracero</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && dark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
-
 <body>
 
 <nav>
@@ -15,51 +23,125 @@
         <div class="links">
             <a href="index.html">Home</a>
             <a href="projects.html">Projects</a>
-            <a href="certifications.html">Certifications</a>
+            <a href="certifications.html" class="active">Certifications</a>
             <a href="technical-blog.html">Technical Blog</a>
             <a href="personal-blog.html">Personal Blog</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 </nav>
 
 <header>
-    <div class="container">
+    <div class="hero-inner">
+        <p class="section-label">Professional Development</p>
         <h1>Certifications</h1>
         <p class="subtitle">
-            Professional development and technical credential roadmap.
+            Technical credential roadmap — building a strong foundation
+            in IT infrastructure and security.
         </p>
     </div>
 </header>
 
 <section class="container">
 
-    <div class="card-grid">
-
-        <div class="card">
+    <!-- Completed -->
+    <div class="cert-group fade-in">
+        <div class="cert-group-header">
             <h3>Completed</h3>
-            <p>None yet — currently building foundation certifications.</p>
+            <span class="badge badge-green">Done</span>
         </div>
+        <div class="cert-item">
+            <span class="cert-dot gray"></span>
+            <div>
+                <div class="cert-name">None yet — building foundation certifications</div>
+                <div class="cert-sub">Working toward CompTIA A+ as first milestone</div>
+            </div>
+        </div>
+    </div>
 
-        <div class="card">
+    <!-- In Progress -->
+    <div class="cert-group fade-in">
+        <div class="cert-group-header">
             <h3>In Progress</h3>
-            <p>CompTIA A+ 220-1201 (Core 1)</p>
+            <span class="badge badge-orange">Active</span>
         </div>
+        <div class="cert-item">
+            <span class="cert-dot orange"></span>
+            <div style="flex:1">
+                <div class="cert-name">CompTIA A+ — Core 1 (220-1201)</div>
+                <div class="cert-sub">Hardware, networking fundamentals, mobile devices, virtualization</div>
+                <div class="progress-wrap">
+                    <div class="progress-label">Study progress</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div class="card">
+    <!-- Planned -->
+    <div class="cert-group fade-in">
+        <div class="cert-group-header">
             <h3>Planned</h3>
-            <p>CompTIA A+ 220-1202 (Core 2)</p>
-            <p>CompTIA Network+ (N10-009)</p>
-            <p>CompTIA Security+ (SY0-701)</p>
-            <p>Cisco Certified Network Associate (200-301)</p>
+            <span class="badge badge-purple">Upcoming</span>
         </div>
 
+        <div class="cert-item">
+            <span class="cert-dot gray"></span>
+            <div>
+                <div class="cert-name">CompTIA A+ — Core 2 (220-1202)</div>
+                <div class="cert-sub">Operating systems, security, software troubleshooting</div>
+            </div>
+        </div>
+
+        <div class="cert-item">
+            <span class="cert-dot gray"></span>
+            <div>
+                <div class="cert-name">CompTIA Network+ (N10-009)</div>
+                <div class="cert-sub">Networking concepts, infrastructure, and troubleshooting</div>
+            </div>
+        </div>
+
+        <div class="cert-item">
+            <span class="cert-dot gray"></span>
+            <div>
+                <div class="cert-name">CompTIA Security+ (SY0-701)</div>
+                <div class="cert-sub">Threats, vulnerabilities, identity management, and cryptography</div>
+            </div>
+        </div>
+
+        <div class="cert-item">
+            <span class="cert-dot gray"></span>
+            <div>
+                <div class="cert-name">Cisco CCNA (200-301)</div>
+                <div class="cert-sub">Routing, switching, IP connectivity, and network security fundamentals</div>
+            </div>
+        </div>
     </div>
 
 </section>
 
 <footer>
-    <p>© 2026 Anthony Bracero</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="technical-blog.html">Technical Blog</a>
+        <a href="personal-blog.html">Personal Blog</a>
+    </nav>
+    <p>&#169; 2026 Anthony Bracero</p>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>
