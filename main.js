@@ -1,39 +1,38 @@
 // ================================
-// Dark Mode (apply before paint)
+// Theme — dark is default (no attribute)
+//         light = data-theme="light"
 // ================================
 const html = document.documentElement;
 const themeToggle = document.querySelector('.theme-toggle');
 
-function applyTheme(theme) {
-  html.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-}
-
-// Respect saved preference, then system preference
-const saved = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-if (saved === 'dark' || (!saved && prefersDark)) {
-  html.setAttribute('data-theme', 'dark');
+// Restore saved light-mode preference
+if (localStorage.getItem('theme') === 'light') {
+  html.setAttribute('data-theme', 'light');
 }
 
 themeToggle?.addEventListener('click', () => {
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  applyTheme(isDark ? 'light' : 'dark');
+  const isLight = html.getAttribute('data-theme') === 'light';
+  if (isLight) {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    html.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+  }
 });
 
 // ================================
-// Mobile Hamburger
+// Mobile hamburger
 // ================================
 const hamburger = document.querySelector('.hamburger');
 const linksMenu = document.querySelector('.links');
 
 hamburger?.addEventListener('click', () => {
-  const isOpen = linksMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
+  const open = linksMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
 });
 
-// Close menu on nav link click
 linksMenu?.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     linksMenu.classList.remove('open');
@@ -42,8 +41,7 @@ linksMenu?.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Close menu on outside click
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
   if (
     linksMenu?.classList.contains('open') &&
     !linksMenu.contains(e.target) &&
@@ -56,15 +54,15 @@ document.addEventListener('click', (e) => {
 });
 
 // ================================
-// Scroll Fade-in
+// Scroll fade-in
 // ================================
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));

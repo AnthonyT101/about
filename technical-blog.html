@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technical Blog | Anthony Bracero</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-      (function() {
-        var saved = localStorage.getItem('theme');
-        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && dark)) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-      })();
-    </script>
+    <script>if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');</script>
 </head>
 <body>
 
@@ -29,13 +21,11 @@
         </div>
         <div class="nav-actions">
             <button class="theme-toggle" aria-label="Toggle theme">
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             </button>
             <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </div>
@@ -43,81 +33,98 @@
 
 <header>
     <div class="hero-inner">
-        <p class="section-label">Technical Blog</p>
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Technical Blog
+        </div>
         <h1>Notes &amp; Lessons Learned</h1>
         <p class="subtitle">
-            Practical insights from real-world systems administration —
+            Practical write-ups from real-world systems administration &mdash;
             what worked, what didn't, and how to automate around the gaps.
         </p>
     </div>
 </header>
 
-<section class="container">
+<div class="container">
+    <section class="section">
+        <article class="article-wrap fade-in">
 
-    <article class="article card fade-in">
-        <div class="article-meta">
-            <span class="badge badge-purple">Systems Administration</span>
-            <span class="badge badge-gray">Automation</span>
-            <span class="article-date">January 2026</span>
-            <span class="article-read-time">4 min read</span>
-        </div>
+            <div class="article-header">
+                <div class="article-chips">
+                    <span class="chip chip-accent">Systems Administration</span>
+                    <span class="chip chip-muted">Automation</span>
+                    <span class="chip chip-muted">Tenable</span>
+                </div>
+                <h2 class="article-title">Working Around Agent Linkage Issues</h2>
+                <div class="article-meta-row">
+                    <span>January 2026</span>
+                    <span>&middot;</span>
+                    <span>4 min read</span>
+                </div>
+            </div>
 
-        <h3>Working Around Agent Linkage Issues</h3>
+            <div class="article-body">
+                <p>
+                    Recently I've been running into a recurring issue where Tenable Nessus Agents
+                    randomly unlink from the Tenable Manager node. When that happens, devices quietly
+                    fall out of coverage until someone notices &mdash; which is exactly the kind of
+                    problem you want to detect quickly and fix consistently.
+                </p>
+                <p>
+                    Originally, I was checking linkage manually by running
+                    <span class="inline-code">nessuscli</span> on endpoints and reviewing the agent
+                    status. That works, but it doesn't scale well when you're responsible for a large
+                    fleet. So I started looking for a way to automate the detection using tools I
+                    already had in place.
+                </p>
+                <p>
+                    In my environment, PDQ Connect is our primary cloud deployment tool. It makes
+                    endpoint management straightforward, but at the time of writing it doesn't yet
+                    have a native PowerShell scanner (it's on the roadmap &mdash; just not available
+                    soon enough for what I needed). Because of that limitation, I couldn't build a
+                    dynamic group directly off the output of <span class="inline-code">nessuscli</span>,
+                    so I created a lightweight workaround.
+                </p>
+                <p>
+                    The approach is simple: a script runs the
+                    <span class="inline-code">nessuscli</span> command, extracts the value that
+                    indicates whether the agent is linked or unlinked, and writes a marker file in
+                    the Temp directory. If the agent is linked, the script creates
+                    <span class="inline-code">Linked.txt</span>. If unlinked, it creates
+                    <span class="inline-code">Unlinked.txt</span>. From there, PDQ Connect's file
+                    scanner does the rest &mdash; it checks endpoints for the presence of those marker
+                    files, and I use that signal to populate two device groups: Linked and Unlinked.
+                </p>
+                <p>
+                    I schedule the script to run weekly so I can quickly identify which devices have
+                    fallen out of linkage and relink them before coverage gaps linger. The best part
+                    is that this pattern is easy to evolve: once PDQ Connect adds a PowerShell scanner,
+                    I can remove the file-marker middle step and have the group evaluate linkage state
+                    directly. At that point it becomes a closed loop &mdash; detect unlinked agents
+                    automatically, drop them into the Unlinked group, and trigger the repair package
+                    to relink and restore coverage.
+                </p>
+                <p>
+                    Sometimes you have to think a little outside the box to get the outcome you want,
+                    especially when working around feature gaps. Small automation wins like this make
+                    day-to-day operations much more reliable.
+                </p>
+            </div>
 
-        <p>
-            Recently I've been running into a recurring issue where Tenable Nessus Agents will randomly
-            unlink from the Tenable Manager node. When that happens, devices quietly fall out of coverage
-            until someone notices — which is exactly the kind of problem you want to detect quickly and
-            fix consistently.
-        </p>
-        <p>
-            Originally, I was checking linkage manually by running nessuscli on endpoints and reviewing
-            the agent status. That works, but it doesn't scale well when you're responsible for a large
-            fleet. So I started looking for a way to automate the detection using tools I already had
-            in place.
-        </p>
-        <p>
-            In my environment, PDQ Connect is our primary cloud deployment tool. It makes endpoint
-            management straightforward, but at the time of writing, it doesn't yet have a native
-            PowerShell scanner (it's on the roadmap — just not available soon enough for what I needed).
-            Because of that limitation, I couldn't build a dynamic group directly off the output of
-            nessuscli, so I created a lightweight workaround.
-        </p>
-        <p>
-            The approach is simple: a script runs the nessuscli command, extracts the value that
-            indicates whether the agent is linked or unlinked, and then writes a marker file in the
-            Temp directory. If the agent is linked, the script creates <code style="font-family:monospace;font-size:0.92em;background:var(--surface-2);padding:2px 6px;border-radius:4px;">Linked.txt</code>.
-            If the agent is unlinked, it creates <code style="font-family:monospace;font-size:0.92em;background:var(--surface-2);padding:2px 6px;border-radius:4px;">Unlinked.txt</code>.
-            From there, PDQ Connect's file scanner does the rest — it checks endpoints for the presence
-            of those marker files, and I use that signal to populate two device groups: Linked and Unlinked.
-        </p>
-        <p>
-            I schedule the script to run weekly so I can quickly identify which devices have fallen out
-            of linkage and relink them before coverage gaps linger. The best part is that this pattern
-            is easy to evolve: once PDQ Connect adds a PowerShell scanner, I can remove the file-marker
-            middle step and have the group evaluate the linkage state directly. At that point, it becomes
-            a closed loop — detect unlinked agents automatically, drop them into an Unlinked group, and
-            trigger the Agent Linkage repair package to relink and restore coverage.
-        </p>
-        <p>
-            Sometimes you have to think a little outside the box to get the outcome you want — especially
-            when you're working around feature gaps — but small automation wins like this can make
-            day-to-day operations much more reliable.
-        </p>
+            <div class="tags" style="margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border);">
+                <span class="tag">Tenable Nessus</span>
+                <span class="tag">PDQ Connect</span>
+                <span class="tag">PowerShell</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Endpoint Management</span>
+            </div>
 
-        <div class="tags">
-            <span class="tag">Tenable Nessus</span>
-            <span class="tag">PDQ Connect</span>
-            <span class="tag">PowerShell</span>
-            <span class="tag">Automation</span>
-            <span class="tag">Endpoint Management</span>
-        </div>
-    </article>
-
-</section>
+        </article>
+    </section>
+</div>
 
 <footer>
-    <nav class="footer-nav" aria-label="Footer navigation">
+    <nav class="footer-nav" aria-label="Footer">
         <a href="projects.html">Projects</a>
         <a href="certifications.html">Certifications</a>
         <a href="technical-blog.html">Technical Blog</a>
