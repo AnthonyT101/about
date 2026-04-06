@@ -362,21 +362,22 @@ header h1 {
   display: flex;
   justify-content: center;
   gap: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 64px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
   overflow: hidden;
-  max-width: 880px;
+  max-width: 900px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .stat {
-  flex: 1;
-  min-width: 140px;
-  padding: 24px 20px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 24px 16px;
   text-align: center;
   border-right: 1px solid var(--border);
 }
