@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Anthony Bracero</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <script>if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');</script>
+</head>
+<body class="login-page">
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="brand">Anthony Bracero</a>
+        <div class="nav-actions">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>Admin Login</h1>
+            <p>Sign in to manage your website</p>
+        </div>
+
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="your@email.com"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div class="form-group checkbox">
+                <input 
+                    type="checkbox" 
+                    id="rememberMe" 
+                    name="rememberMe"
+                >
+                <label for="rememberMe">Remember me</label>
+            </div>
+
+            <button type="submit" class="button button-full" id="loginBtn">
+                <span class="btn-text">Sign In</span>
+                <span class="btn-spinner" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                </span>
+            </button>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+        </form>
+
+        <div class="login-footer">
+            <p>Don't have an account? <a href="#signup" id="signupToggle">Create one</a></p>
+            <p><a href="index.html">Back to website</a></p>
+        </div>
+    </div>
+
+    <!-- Sign Up Form (hidden by default) -->
+    <div class="signup-card" id="signupCard" style="display: none;">
+        <div class="login-header">
+            <h1>Create Admin Account</h1>
+            <p>Set up your admin credentials</p>
+        </div>
+
+        <form id="signupForm" class="login-form">
+            <div class="form-group">
+                <label for="signupEmail">Email Address</label>
+                <input 
+                    type="email" 
+                    id="signupEmail" 
+                    name="email" 
+                    placeholder="your@email.com"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input 
+                    type="password" 
+                    id="signupPassword" 
+                    name="password" 
+                    placeholder="Minimum 6 characters"
+                    required
+                    autocomplete="new-password"
+                    minlength="6"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signupConfirm">Confirm Password</label>
+                <input 
+                    type="password" 
+                    id="signupConfirm" 
+                    name="confirm" 
+                    placeholder="Confirm your password"
+                    required
+                    autocomplete="new-password"
+                    minlength="6"
+                >
+            </div>
+
+            <button type="submit" class="button button-full" id="signupBtn">
+                <span class="btn-text">Create Account</span>
+                <span class="btn-spinner" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                </span>
+            </button>
+
+            <div id="signupError" class="error-message"></div>
+            <div id="signupSuccess" class="success-message"></div>
+        </form>
+
+        <div class="login-footer">
+            <p>Already have an account? <a href="#login" id="loginToggle">Sign in</a></p>
+        </div>
+    </div>
+</main>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"></script>
+
+<!-- Firebase Configuration -->
+<script src="firebase-config.js"></script>
+
+<!-- Login Script -->
+<script src="login.js"></script>
+
+<!-- Main Theme Script -->
+<script src="main.js"></script>
+
+</body>
+</html>
